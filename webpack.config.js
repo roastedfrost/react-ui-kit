@@ -9,7 +9,7 @@ module.exports = {
   entry: path.join(__dirname, '/src/entry.js'),
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: '[name].bundle.js'
+    filename: '[name].[contenthash].bundle.js'
   },
   devServer: {
     open: true,
@@ -43,6 +43,18 @@ module.exports = {
           },
           {
             loader: 'postcss-loader'
+          }
+        ]
+      },
+      {
+        test: /.svg$/,
+        include: [path.join(__dirname, '/src/assets/svg')],
+        use: [
+          {
+            loader: 'svg-sprite-loader'
+          },
+          {
+            loader: 'svgo-loader'
           }
         ]
       }
